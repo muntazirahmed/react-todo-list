@@ -1,25 +1,32 @@
-import Todo from './components/Todo';
-import './App.css';
-import Todoform from './components/Todoform'
+import React from 'react';
+import  './App.css'
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import Allmeetups from './components/Allmeetups';
+import Newmeetups from './components/Newmeetups';
+import Favourites from './components/Favourites';
+import Navbar from './components/Navbar'
 
 
+const App = () => {
 
-function App() {
- let mylist=[
-  {id:"l1", name:"school fee",date:new Date(2021, 2,11)},
-  {id:"l2", name:"car wash",date:new Date(2021, 3,10)},
-  {id:"l3", name:"react",date:new Date(2021, 13,11)},
- ]
-  const receiveform = (received) =>{
-
-  }
+  
   return (
-    <div className="App">
-    <Todoform  recievedata={receiveform }/>
-    <Todo list={mylist}/>
+    <div>
+ <Router>
+  <Navbar/>
+  <Routes>
+       <Route path="/"element={<Allmeetups/>}/>
+       <Route path="/Newmeetups"element={<Newmeetups/>}/>
+       <Route path="/Favourites"element={<Favourites/>}/>
+  </Routes>
+
+ </Router>
+     
+     
     </div>
-  );
+    
+
+  )
 }
 
-export default App;
-
+export default App
