@@ -1,24 +1,34 @@
-import React from 'react';
+import React ,{useState,useEffect} from 'react';
 import Meetuplist from './Meetuplist'
-const dummydata=[
-  {
-  id:"a1",
-  title:"Samir",
-  image:'https://th.bing.com/th/id/OIP.y7XPzjE6dkuP3STU-9KV7QHaHa?w=208&h=208&c=7&r=0&o=5&dpr=1.25&pid=1.7',
-  place:"kolkata"
-},
-{
-  id:"a2",
-  title:"Abcd",
-  image:"https://th.bing.com/th/id/OIP.y7XPzjE6dkuP3STU-9KV7QHaHa?w=208&h=208&c=7&r=0&o=5&dpr=1.25&pid=1.7",
-  place:"kolkata"
-},
-]
+
 
 const Allmeetups = () => {
+  const[loading,setloading]=useState(true);
+  const[loadedmeetup,setloadedmeetup]=useState([]);
+
+   useEffect (()=>{
+    setloading(true);
+    fetch('https://meet-up-project-557ae-default-rtdb.firebaseio.com/meetups.json'
+  ).then(response=>{
+    return response.json();
+  }).then(data=>{
+    const  meetups=[];
+    for (const key in data){
+      const meetup={
+        id:key,...data[key]
+      };
+      meetups.push(meetup);
+    }
+    setloading(false);
+    setloadedmeetup(meetups);
+  });
+  },[])
+  if(loading){
+    return <section><h1>loading........</h1></section>
+  }
   return (
     <div>
-      <div><Meetuplist meetups={dummydata}/></div>
+      <div><Meetuplist meetups={loadedmeetup}/></div>
     </div>
   )
 }

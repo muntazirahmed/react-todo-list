@@ -1,8 +1,10 @@
 import React from 'react';
+
 import Newmeetupform from './Newmeetupform';
 
 
 const Newmeetups = () => {
+ 
   function addmeetuphandler(meetupdata){
     fetch('https://meet-up-project-557ae-default-rtdb.firebaseio.com/meetups.json', {
       method:'POST',
@@ -10,6 +12,7 @@ const Newmeetups = () => {
       headers:{
         'content-type': 'application/json'
       }
+     
     }
     );
   }
