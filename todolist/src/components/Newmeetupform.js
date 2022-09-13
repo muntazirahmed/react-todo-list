@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRef} from 'react';
 
-const Newmeetupform = () => {
+const Newmeetupform = (props) => {
 const titleinputref=useRef();
 const placeinputref=useRef();
 const imageinputref=useRef();
@@ -12,13 +12,16 @@ const imageinputref=useRef();
        const enteredtitle=titleinputref.current.value;
        const enteredplace=placeinputref.current.value;
        const enteredimage=imageinputref.current.value;
-        const meetupdata={
+        
+       const meetupdata={
           title:enteredtitle,
           place:enteredplace,
           image:enteredimage
-        }
+        };
+
+        props.onaddata(meetupdata);
        
-console.log(meetupdata)
+
     }
   return (
     <div>
